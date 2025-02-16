@@ -1,6 +1,6 @@
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr_block
   tags = {
-    name = "my_vpc"
+    name = var.vpc_name
   }
 }
