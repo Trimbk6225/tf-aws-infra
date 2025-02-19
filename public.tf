@@ -1,5 +1,5 @@
- //Create Public Route
- resource "aws_route_table" "public_rt" {
+//Create Public Route
+resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.my_vpc.id
 }
 resource "aws_route" "public_route" {
@@ -12,7 +12,7 @@ resource "aws_route" "public_route" {
 resource "aws_route_table_association" "public_assoc_1" {
   subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.public_rt.id
-  
+
 }
 
 resource "aws_route_table_association" "public_assoc_2" {
