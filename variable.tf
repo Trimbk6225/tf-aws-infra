@@ -23,18 +23,16 @@ variable "vpc_cidr" {
   type = string
 }
 
+data "aws_availability_zones" "available" {}
+
 variable "public_subnets" {
-  description = "Map of public subnet configurations"
   type = map(object({
     cidr = string
-    az   = string
   }))
 }
 
 variable "private_subnets" {
-  description = "Map of private subnet configurations"
   type  = map(object({
     cidr = string
-    az   = string
   }))
 }
