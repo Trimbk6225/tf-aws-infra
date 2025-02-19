@@ -10,9 +10,9 @@ resource "aws_subnet" "public_subnet_1" {
 }
 
 resource "aws_subnet" "public_subnet_2" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = var.public_subnets["ps2"].cidr
-  availability_zone = data.aws_availability_zones.available.names[1]
+  vpc_id                  = aws_vpc.my_vpc.id
+  cidr_block              = var.public_subnets["ps2"].cidr
+  availability_zone       =data.aws_availability_zones.available.names[1]
   tags = {
     Name = "ps2"
   }
@@ -41,8 +41,8 @@ resource "aws_subnet" "private_subnet_1" {
 }
 
 resource "aws_subnet" "private_subnet_2" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = var.private_subnets["pas2"].cidr
+  vpc_id = aws_vpc.my_vpc.id
+  cidr_block= var.private_subnets["pas2"].cidr
   availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "pas2"
@@ -50,8 +50,8 @@ resource "aws_subnet" "private_subnet_2" {
 }
 
 resource "aws_subnet" "private_subnet_3" {
-  vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = var.private_subnets["pas3"].cidr
+  vpc_id = aws_vpc.my_vpc.id
+  cidr_block = var.private_subnets["pas3"].cidr
   availability_zone = data.aws_availability_zones.available.names[2]
   tags = {
     Name = "pas3"
