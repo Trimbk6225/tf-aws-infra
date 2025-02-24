@@ -3,15 +3,15 @@ variable "profile" {
   description = "Aws profile name"
 }
 
-variable "aws_region" {
-  description = "The AWS region to deploy resources to"
-  type        = string
-}
+#variable "aws_region" {
+ # description = "The AWS region to deploy resources to"
+ # type        = string
+#}
 
-variable "vpc_cidr_block" {
-  description = "CIDR block for the VPC"
-  type        = string
-}
+# variable "vpc_cidr_block" {
+#   description = "CIDR block for the VPC"
+#   type        = string
+# }
 
 variable "vpc_name" {
   description = "Name tag for the VPC"
