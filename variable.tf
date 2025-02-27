@@ -38,7 +38,7 @@ variable "private_subnets" {
 }
 
 variable "webapp_port" {
-  type        = number
+  type = number
 }
 
 variable "instance_type" {
@@ -48,5 +48,5 @@ variable "instance_type" {
 }
 
 variable "custom_ami_id" {
-  type        = string 
+  type = string
 }
