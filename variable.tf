@@ -36,3 +36,17 @@ variable "private_subnets" {
     cidr = string
   }))
 }
+
+variable "webapp_port" {
+  type = number
+}
+
+variable "instance_type" {
+  description = "Type of EC2 instance"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "custom_ami_id" {
+  type = string
+}

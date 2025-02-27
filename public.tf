@@ -1,6 +1,10 @@
 //Create Public Route
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.my_vpc.id
+
+  tags = {
+    Name = "public-route-table" # Name for the route table
+  }
 }
 resource "aws_route" "public_route" {
   route_table_id         = aws_route_table.public_rt.id
