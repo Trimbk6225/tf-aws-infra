@@ -47,3 +47,17 @@ resource "aws_security_group" "application_sg" {
     Name = "application-security-group"
   }
 }
+
+resource "aws_security_group" "database_sg" {
+  name        = "${var.environment}-database-sg"
+  description = "Security group for RDS instances"
+
+  vpc_id = aws_vpc.my_vpc.id
+
+  ingress {
+    from_port       = var.db_port
+    to_port         = var.db_port
+    protocol        = "tcp"
+    security_groups = [aws_security_group.application_sg.id]
+  }
+}
