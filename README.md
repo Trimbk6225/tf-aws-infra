@@ -2,6 +2,8 @@
 Terraform: Install Terraform on your local machine.
 AWS CLI: Install and configure the AWS CLI on your system.
 
+
+
 Set Up AWS CLI
 	1.	Configure AWS CLI with aws configure.
 	2.	Set up AWS credentials:
@@ -23,3 +25,8 @@ Set Up AWS CLI
     4. Destroy Infrastructure
     Commands:-
         terraform apply -var-file=dev.tfvars
+
+
+For Assignment 5
+
+I added iam_role.tf, rds.tf, rds-sg.tf file for s3 bucket and s
