@@ -35,8 +35,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_lifecycle" {
   bucket = aws_s3_bucket.s3_bucket.id
 
   rule {
-    id      = "transition-to-IA"
-    status  = "Enabled"
+    id     = "transition-to-IA"
+    status = "Enabled"
 
     transition {
       days          = 30
@@ -52,13 +52,13 @@ resource "aws_s3_bucket_policy" "s3_deny_public" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Deny"
+        Effect    = "Deny"
         Principal = "*"
-        Action = "s3:GetObject"
-        Resource = "${aws_s3_bucket.s3_bucket.arn}/*"
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.s3_bucket.arn}/*"
         Condition = {
           StringEquals = {
-            "aws:PrincipalType": "Anonymous"
+            "aws:PrincipalType" : "Anonymous"
           }
         }
       }
