@@ -32,6 +32,42 @@ S3_BUCKET_NAME=${aws_s3_bucket.s3_bucket.bucket}       # Fetching S3 bucket name
 AWS_REGION=${var.aws_region}
 EOT
 
+
+# Install and configure CloudWatch Agent
+sudo mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
+# sudo tee /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json <<EOT
+# {
+#   "logs": {
+#     "logs_collected": {
+#       "files": {
+#         "collect_list": [
+#           {
+#             "file_path": "/var/log/csye6225/webapp.log",
+#             "log_group_name": "csye6225-webapp-logs",
+#             "log_stream_name": "{instance_id}"
+#           }
+#         ]
+#       }
+#     }
+#   },
+#   "metrics": {
+#     "metrics_collected": {
+#       "statsd": {
+#         "service_address": ":8125"
+#       }
+#     }
+#   }
+# }
+# EOT
+
+# Download and install CloudWatch Agent
+# wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+# sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+
+# Start and enable CloudWatch Agent
+# sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json -s
+# sudo systemctl enable amazon-cloudwatch-agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/cloudwatch-config.json -s
 sudo systemctl enable csye6225
 sudo service csye6225 start
 EOF
