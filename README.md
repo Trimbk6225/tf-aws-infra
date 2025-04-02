@@ -30,3 +30,11 @@ Set Up AWS CLI
 For Assignment 5
 
 I added iam_role.tf, rds.tf, rds-sg.tf file for s3 bucket and s
+
+
+
+for this assignment   
+i added autoscaling.tf, cloudwatch.tf, load_balance.tf, output.tf, route53,
+
+
+
