@@ -1,15 +1,15 @@
 resource "aws_security_group" "rds_sg" {
-  vpc_id = aws_vpc.my_vpc.id # Use the VPC ID fetched dynamically
+  vpc_id = aws_vpc.my_vpc.id
 
   // Define your security group settings here
   name        = "rds-security-group"
   description = "Security group for RDS instance"
 
   ingress {
-    from_port   = 3306 # Replace with the port your RDS uses, e.g., MySQL is 3306
+    from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Example: allow all inbound traffic (adjust as necessary)
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {

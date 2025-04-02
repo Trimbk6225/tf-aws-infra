@@ -106,13 +106,13 @@ variable "db_password" {
   sensitive   = true
 }
 
-# Database port
+
 variable "db_port" {
   description = "The port on which the database listens (e.g., 3306 for MySQL)"
   type        = number
 }
 
-# Security group for database access
+
 variable "multi_az" {
   description = "Specifies if the RDS instance should be Multi-AZ"
   type        = bool
@@ -121,4 +121,49 @@ variable "multi_az" {
 variable "db_name" {
   description = "The name of the database to create in the RDS instance"
   type        = string
+}
+
+variable "domain_name" {
+  description = "The root domain name, e.g., example.com"
+  type        = string
+}
+
+variable "key_name" {
+  description = "The name of the SSH key pair for EC2 instances"
+  type        = string
+}
+
+variable "desired_capacity" {
+  description = "Desired number of instances in the Auto Scaling Group"
+  type        = number
+}
+
+variable "min_size" {
+  description = "Minimum number of instances in the Auto Scaling Group"
+  type        = number
+}
+
+variable "max_size" {
+  description = "Maximum number of instances in the Auto Scaling Group"
+  type        = number
+}
+
+variable "cpu_high_threshold" {
+  description = "High CPU utilization threshold for scaling out"
+}
+
+variable "cpu_low_threshold" {
+  description = "Low CPU utilization threshold for scaling in"
+}
+
+variable "cooldown_period" {
+  description = "Cooldown period between scaling actions"
+}
+
+variable "scale_out_adjustment" {
+  description = "Number of instances to add during scale-out"
+}
+
+variable "scale_in_adjustment" {
+  description = "Number of instances to remove during scale-in"
 }
