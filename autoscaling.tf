@@ -16,17 +16,39 @@ resource "aws_launch_template" "web_app_lt" {
 
   user_data = base64encode(<<EOF
 #!/bin/bash
+exec > /var/log/user-data.log 2>&1
+set -x
 
-# Create .env file with dynamically retrieved values
-cat <<EOT >> /opt/csye6225/webapp/.env
+yum update -y
+yum install -y python3-pip jq unzip curl git
+
+# Install AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# Pull password securely and log it
+SECRET_JSON=$(aws secretsmanager get-secret-value \
+  --region ${var.aws_region} \
+  --secret-id ${var.environment}-db-password \
+  --query SecretString --output text)
+
+echo "Fetched secret: $SECRET_JSON"
+
+DB_PASSWORD=$(echo $SECRET_JSON | jq -r .password)
+
+mkdir -p /opt/csye6225/webapp
+
+cat <<EOT > /opt/csye6225/webapp/.env
 DATABASE_USERNAME=${var.db_username}
-DATABASE_PASSWORD=${var.db_password}
+DATABASE_PASSWORD=$DB_PASSWORD
 DATABASE_HOST=${aws_db_instance.rds_instance.address}
 DATABASE_NAME=${var.db_name}
 DATABASE_PORT=${var.db_port}
 S3_BUCKET_NAME=${aws_s3_bucket.s3_bucket.bucket}
 AWS_REGION=${var.aws_region}
 EOT
+
 
 
 sudo mkdir -p /opt/aws/amazon-cloudwatch-agent/etc

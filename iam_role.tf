@@ -27,14 +27,22 @@ resource "aws_iam_policy" "s3_access_policy" {
           "${aws_s3_bucket.s3_bucket.arn}",
           "${aws_s3_bucket.s3_bucket.arn}/*"
         ]
-
-        }, {
+      },
+      {
         Action = [
-          "rds:*",
+          "rds:*"
         ]
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "kms:Decrypt"
+        ]
+        Resource = "*"
+      }
     ]
   })
 }
@@ -81,3 +89,4 @@ resource "aws_iam_policy_attachment" "attach_cloudwatch_policy" {
   roles      = [aws_iam_role.ec2_role.name]
   policy_arn = aws_iam_policy.cloudwatch_policy.arn
 }
+
