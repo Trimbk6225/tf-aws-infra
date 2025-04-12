@@ -69,28 +69,28 @@ resource "aws_kms_key" "rds_key" {
     Id      = "rds-kms-policy",
     Statement = [
       {
-        Sid: "Enable IAM User Permissions",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        Sid : "Enable IAM User Permissions",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         },
-        Action: "kms:*",
-        Resource: "*"
+        Action : "kms:*",
+        Resource : "*"
       },
       {
-        Sid: "Allow RDS Encryption Usage",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-role"
+        Sid : "Allow RDS Encryption Usage",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-role"
         },
-        Action: [
+        Action : [
           "kms:Encrypt",
           "kms:Decrypt",
           "kms:ReEncrypt*",
           "kms:GenerateDataKey*",
           "kms:DescribeKey"
         ],
-        Resource: "*"
+        Resource : "*"
       }
     ]
   })
@@ -120,7 +120,7 @@ resource "aws_kms_key" "s3_key" {
           "Action" : "kms:*",
           "Resource" : "*"
         },
- 
+
         {
           "Sid" : "Allows access for Key Administrators",
           "Effect" : "Allow",
@@ -181,9 +181,9 @@ resource "aws_kms_key" "s3_key" {
         }
       ]
     }
- 
+
   )
- 
+
   tags = {
     Name = "s3-encryption-key"
   }
@@ -201,41 +201,41 @@ resource "aws_kms_key" "secrets_key" {
     Id      = "secrets-kms-policy",
     Statement = [
       {
-        Sid: "Enable IAM User Permissions",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        Sid : "Enable IAM User Permissions",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         },
-        Action: "kms:*",
-        Resource: "*"
+        Action : "kms:*",
+        Resource : "*"
       },
       {
-        Sid: "Allow EC2 Role to use Secrets Key",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-role"
+        Sid : "Allow EC2 Role to use Secrets Key",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-role"
         },
-        Action: [
+        Action : [
           "kms:Encrypt",
           "kms:Decrypt",
           "kms:ReEncrypt*",
           "kms:GenerateDataKey*",
           "kms:DescribeKey"
         ],
-        Resource: "*"
+        Resource : "*"
       },
       {
-        Sid: "Allow Secrets Manager access",
-        Effect: "Allow",
-        Principal: {
-          Service: "secretsmanager.amazonaws.com"
+        Sid : "Allow Secrets Manager access",
+        Effect : "Allow",
+        Principal : {
+          Service : "secretsmanager.amazonaws.com"
         },
-        Action: [
+        Action : [
           "kms:Decrypt",
           "kms:Encrypt",
           "kms:GenerateDataKey*"
         ],
-        Resource: "*"
+        Resource : "*"
       }
     ]
   })
