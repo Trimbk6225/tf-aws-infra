@@ -12,11 +12,11 @@ resource "aws_db_parameter_group" "db_param_group" {
 resource "aws_db_instance" "rds_instance" {
   identifier                = var.rds_identifier
   engine                    = var.db_engine
+  db_name                   = var.db_name
   instance_class            = var.db_instance_class
   allocated_storage         = var.db_storage
   username                  = var.db_username
-  password                  = var.db_password
-  db_name                   = var.db_name
+  password                  = random_password.db_password.result
   db_subnet_group_name      = aws_db_subnet_group.rds_subnet_group.name
   vpc_security_group_ids    = [aws_security_group.rds_sg.id]
   parameter_group_name      = aws_db_parameter_group.db_param_group.name
@@ -24,6 +24,11 @@ resource "aws_db_instance" "rds_instance" {
   multi_az                  = false
   skip_final_snapshot       = true
   final_snapshot_identifier = "${var.rds_identifier}-final-snapshot"
+  storage_encrypted         = true
+  kms_key_id                = aws_kms_key.rds_key.arn
+  depends_on = [
+    aws_kms_key.rds_key
+  ]
 
   tags = {
     Name        = "${var.rds_identifier}-instance"

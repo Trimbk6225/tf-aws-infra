@@ -5,10 +5,10 @@ resource "aws_security_group" "application_sg" {
 
   // Allow SSH (Port 22) from anywhere
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.load_balancer_sg.id]
   }
 
   # // Allow HTTP (Port 80) from anywhere

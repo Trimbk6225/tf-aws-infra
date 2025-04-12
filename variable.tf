@@ -100,11 +100,11 @@ variable "db_username" {
   sensitive   = true
 }
 
-variable "db_password" {
-  description = "The password for the RDS database"
-  type        = string
-  sensitive   = true
-}
+# variable "db_password" {
+#   description = "The password for the RDS database"
+#   type        = string
+#   sensitive   = true
+# }
 
 
 variable "db_port" {
@@ -166,4 +166,9 @@ variable "scale_out_adjustment" {
 
 variable "scale_in_adjustment" {
   description = "Number of instances to remove during scale-in"
+}
+
+variable "imported_ssl_cert_arn" {
+  description = "ARN of the imported SSL certificate for HTTPS listener"
+  type        = string
 }
