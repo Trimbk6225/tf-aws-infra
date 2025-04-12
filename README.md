@@ -38,4 +38,7 @@ i added autoscaling.tf, cloudwatch.tf, load_balance.tf, output.tf, route53,
 
 
 
-git 
+
+ import command 
+
+ aws acm import-certificate --certificate fileb://www_demo_trimbkjagtap_me.crt --certificate-chain fileb://www_demo_trimbkjagtap_me.ca-bundle --private-key fileb://private.key
